@@ -1,0 +1,10 @@
+[package]
+name = "pattern"
+version = "0.1.0"
+edition = "2024"
+author = "Jorge Cataño <jorgeenriquecatano@gmail.com>"
+description = "A pattern matching library"
+license = "MIT"
+
+[dependencies]
+regex = "1.11.1"
