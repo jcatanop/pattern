@@ -1,4 +1,4 @@
-# PII-rs
+# PATTERN
 
 This is a Rust library that implements pattern matching tools to detect PII (Personally Identifiable Information).
 
