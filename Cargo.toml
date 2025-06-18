@@ -3,7 +3,7 @@ name = "pattern"
 version = "0.1.0"
 edition = "2024"
 author = "Jorge Cataño <jorgeenriquecatano@gmail.com>"
-description = "A pattern matching library"
+description = "A pattern matching library for detect PII"
 license = "MIT"
 
 [dependencies]
