@@ -6,7 +6,7 @@ use std::io;
 fn main() {
 
     println!("Please input your text to analyze:");
-
+    // Request a text to analyze
     let mut text_to_analyze = String::new();
     io::stdin()
     .read_line(&mut text_to_analyze)
@@ -17,16 +17,11 @@ fn main() {
 
     let text_to_analyze: &str = text_to_analyze.trim();
 
+    // Check if the text has any patterns like IP, credit card, US-SSN 
     let registry = PatternRegistry::new();
     let mut pattern = registry.detect_pattern(text_to_analyze);
 
-    // si no encuentra un patron, entonces verifica si puede ser una LOCATION
-    if pattern == "" {
-        let text_without_space = &text_to_analyze.replace(" ","");
-        pattern = registry.detect_person_or_location("LOCATION", &text_without_space);
-    }
-
-    // si aun no encuentra un patron, entonces verifica si puede ser un PERSON
+    // If no PII was found, check if it could be PERSON
     if pattern == "" {
         pattern = registry.detect_person_or_location("PERSON", text_to_analyze);
         
@@ -40,7 +35,14 @@ fn main() {
             }
         }
     }
-    
+
+    // If no PII is detected yet, proceed to check if it is LOCATION
+    if pattern == "" {
+        let text_without_space = &text_to_analyze.replace(" ","");
+        pattern = registry.detect_person_or_location("LOCATION", &text_without_space);
+    }
+
+    // Show result
     println!("PII Type: {} \nText analyzed: {}", pattern, text_to_analyze);
     let duration = start.elapsed();
     println!("Time taken: {} ms", duration.as_millis());
